@@ -6,6 +6,9 @@ from boot.Terrain import Terrain
 
 
 class Area:
+    open_list: List[Field]
+    closed_list: List[Field]
+
     def __init__(self, filename: str):
         """
         Creates a new Area object based on a csv file
@@ -28,11 +31,12 @@ class Area:
                 if '' not in row:
                     #Append one row at a time, for each element create a field with terrain corresponding to read number
                     self.fields.append(list(map(lambda x: Field(Terrain(int(x))), row)))
-        #Set Neighbours for all fields
+        #Set Neighbours for all fields, set coordinates
         row: List[Field]
         for i, row in enumerate(self.fields):
             field: Field
             for j, field in enumerate(row):
+                field.set_position(i, j)
                 neighbours: List[Field] = []
                 # Potentially available neighbours:
                 #    b
@@ -46,3 +50,23 @@ class Area:
                     if (0 <= i + offsets[0] < len(self.fields)) and (0 <= j + offsets[1] < len(self.fields[i])):
                         neighbours.append(self.fields[i + offsets[0]][j + offsets[1]])
                 field.set_neighbours(neighbours)
+
+    def a_star(self, start: List[int], target: List[int]):
+        current_field = self.fields[start[0]][start[1]]
+        current_field.cost_from_start = 0
+        target_field = self.fields[target[0]][target[1]]
+        self.open_list.append(current_field)
+        while current_field != target_field:
+            for field in self.open_list:
+                if field.get_total_cost() < current_field.get_total_cost():
+                    current_field = field
+            for neighbour in current_field.neighbours:
+                if neighbour.visited:
+                    continue
+                if neighbour.terrain.is_water():
+                    if not neighbour.boat_available():
+                        continue
+                    else:
+                        self.open_list.append(neighbour)
+            self.open_list.remove(current_field)
+            self.closed_list.append(current_field)
