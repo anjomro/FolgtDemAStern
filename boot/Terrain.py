@@ -20,9 +20,10 @@ class Terrain:
         #Todo: Write interface for entering custom costs
         self.cost = converter[terrain_number]
 
-    def get_cheapest_terrain_cost(self) -> int:
+    @staticmethod
+    def get_cheapest_terrain_cost() -> int:
         # Cast the dict of terrains into a list, get the first element and assign cost
-        cheapest_terrain_cost = list(self.terrain_cache.values())[0].cost
+        cheapest_terrain_cost = list(Terrain.terrain_cache.values())[0].cost
         for terrain in Terrain.terrain_cache.values():
             if terrain.cost < cheapest_terrain_cost:
                 cheapest_terrain_cost = terrain.cost

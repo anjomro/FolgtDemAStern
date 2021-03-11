@@ -1,5 +1,6 @@
 from typing import List, Tuple
 
+from boot.PathNotFoundException import PathNotFoundException
 from boot.Terrain import Terrain
 
 
@@ -13,9 +14,10 @@ class Field:
 
     def __init__(self, terrain: Terrain):
         self.terrain = terrain
+        self.visited = False
 
     def __str__(self):
-        return "Field, T{}".format(self.terrain.terrain_number)
+        return "F({}|{})-T{}".format(self.position[0], self.position[1], self.terrain.terrain_number)
 
     def set_neighbours(self, neighbours: List['Field']):
         """
@@ -24,12 +26,38 @@ class Field:
         """
         self.neighbours = neighbours
 
+    def set_as_start_field(self):
+        """
+        Sets Field as start field by linking 'previous' attribute to itself
+        """
+        self.previous = self
+
+    def is_start_field(self) -> bool:
+        """
+        :return: Returns True when Field is start, False if not
+        """
+        try:
+            return self is self.previous
+        except AttributeError: # In Case previous Field is not yet set
+            return False
+
+    def recurse_path(self) -> List['Field']:
+        if self.is_start_field():
+            return [self]
+        else:
+            try:
+                return self.previous.recurse_path() + [self]
+            except AttributeError:
+                raise PathNotFoundException("Target field isnt connected to startpoint.")
+
     def boat_available(self) -> bool:
         """
         Checks for availability of the boat recursively
         :return: Boolean is true, if boat is still available
         """
-        if self.terrain.terrain_number != 0 and self.previous.terrain.terrain_number == 0:
+        if self.is_start_field():
+            return True # Recursion End
+        elif self.terrain.terrain_number != 0 and self.previous.terrain.terrain_number == 0:
             return False
         else:
             return self.previous.boat_available()

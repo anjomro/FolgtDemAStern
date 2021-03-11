@@ -51,22 +51,29 @@ class Area:
                         neighbours.append(self.fields[i + offsets[0]][j + offsets[1]])
                 field.set_neighbours(neighbours)
 
-    def a_star(self, start: Field, target: Field):
+    def __a_star(self, start: Field, target: Field):
+        start.set_as_start_field()
         current_field = start
+        current_field.visited = True
         current_field.cost_from_start = 0
-        self.open_list.append(current_field)
+        self.open_list = [current_field]
+        self.closed_list = []
         while current_field != target:
-            for field in self.open_list:
+            current_field = self.open_list[0]
+            for field in self.open_list[1:]:
                 if field.get_total_cost(target) < current_field.get_total_cost(target):
                     current_field = field
             for neighbour in current_field.neighbours:
-                if neighbour.visited:
-                    continue
-                if neighbour.terrain.is_water():
-                    if not neighbour.boat_available():
-                        continue
-                    else:
-                        self.open_list.append(neighbour)
-                        neighbour.visited = True
-            self.open_list.remove(current_field)
+                if not neighbour.visited and (not neighbour.terrain.is_water() or current_field.boat_available()):
+                    self.open_list.append(neighbour)
+                    neighbour.cost_from_start = current_field.cost_from_start + current_field.terrain.cost
+                    neighbour.visited = True
+                    neighbour.previous = current_field
+            if current_field in self.open_list:
+                self.open_list.remove(current_field)
             self.closed_list.append(current_field)
+
+
+    def get_path(self, start: Field, target: Field) -> List[Field]:
+        self.__a_star(start, target)
+        return target.recurse_path()
