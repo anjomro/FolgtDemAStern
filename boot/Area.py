@@ -51,14 +51,13 @@ class Area:
                         neighbours.append(self.fields[i + offsets[0]][j + offsets[1]])
                 field.set_neighbours(neighbours)
 
-    def a_star(self, start: List[int], target: List[int]):
-        current_field = self.fields[start[0]][start[1]]
+    def a_star(self, start: Field, target: Field):
+        current_field = start
         current_field.cost_from_start = 0
-        target_field = self.fields[target[0]][target[1]]
         self.open_list.append(current_field)
-        while current_field != target_field:
+        while current_field != target:
             for field in self.open_list:
-                if field.get_total_cost() < current_field.get_total_cost():
+                if field.get_total_cost(target) < current_field.get_total_cost(target):
                     current_field = field
             for neighbour in current_field.neighbours:
                 if neighbour.visited:
@@ -68,5 +67,6 @@ class Area:
                         continue
                     else:
                         self.open_list.append(neighbour)
+                        neighbour.visited = True
             self.open_list.remove(current_field)
             self.closed_list.append(current_field)
