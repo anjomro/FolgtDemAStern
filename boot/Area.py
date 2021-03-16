@@ -1,4 +1,5 @@
 import csv
+import pygame
 from typing import List
 
 from boot.Field import Field
@@ -8,6 +9,21 @@ from boot.Terrain import Terrain
 class Area:
     open_list: List[Field]
     closed_list: List[Field]
+
+    width: int
+    height: int
+    DRAW_SIZE = 15
+    INDENT = int(DRAW_SIZE/3)
+
+    color_cache = {
+        0: [28, 151, 217],
+        1: [68, 230, 18],
+        2: [87, 87, 87],
+        3: [102, 90, 44],
+        4: [37, 77, 31]
+    }
+
+    display = None
 
     def __init__(self, filename: str):
         """
@@ -34,8 +50,10 @@ class Area:
         #Set Neighbours for all fields, set coordinates
         row: List[Field]
         for i, row in enumerate(self.fields):
+            self.width = i
             field: Field
             for j, field in enumerate(row):
+                self.height = j
                 field.set_position(i, j)
                 neighbours: List[Field] = []
                 # Potentially available neighbours:
@@ -50,6 +68,28 @@ class Area:
                     if (0 <= i + offsets[0] < len(self.fields)) and (0 <= j + offsets[1] < len(self.fields[i])):
                         neighbours.append(self.fields[i + offsets[0]][j + offsets[1]])
                 field.set_neighbours(neighbours)
+
+    def draw_area(self):
+        if self.fields.__len__() < 1:
+            return
+        self.display = pygame.display.set_mode([self.width * self.DRAW_SIZE, self.height * self.DRAW_SIZE])
+        row: List[Field]
+        for x, row in enumerate(self.fields):
+            field: Field
+            for y, field in enumerate(row):
+                pygame.draw.rect(self.display, self.color_cache[field.terrain.terrain_number],
+                                 (x * self.DRAW_SIZE, y * self.DRAW_SIZE, self.DRAW_SIZE, self.DRAW_SIZE))
+
+    def draw_path(self, path: List[Field]):
+        if self.display is None:
+            return
+        for field in path:
+            color = [255, 0, 0]
+            if field.terrain.is_water():
+                color = [255, 255, 0]
+            x = field.position[0] * self.DRAW_SIZE + self.INDENT
+            y = field.position[1] * self.DRAW_SIZE + self.INDENT
+            pygame.draw.rect(self.display, color, (x, y, self.INDENT, self.INDENT))
 
     def __a_star(self, start: Field, target: Field):
         start.set_as_start_field()
@@ -72,7 +112,6 @@ class Area:
             if current_field in self.open_list:
                 self.open_list.remove(current_field)
             self.closed_list.append(current_field)
-
 
     def get_path(self, start: Field, target: Field) -> List[Field]:
         self.__a_star(start, target)
