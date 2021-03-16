@@ -31,6 +31,8 @@ class Area:
         :param filename: name of the file from which the area data is read
         """
         self.fields: List[List[Field]] = []
+        self.open_list: List[Field] = []
+        self.closed_list: List[Field] = []
         self.read_csv(filename)
 
     def read_csv(self, filename: str, delimiter: str = ';'):
@@ -90,6 +92,9 @@ class Area:
             x = field.position[0] * self.DRAW_SIZE + self.INDENT
             y = field.position[1] * self.DRAW_SIZE + self.INDENT
             pygame.draw.rect(self.display, color, (x, y, self.INDENT, self.INDENT))
+
+    def convert_mouse_to_field(self, pos: List[int]) -> List[int]:
+        return [int(pos[0]/self.DRAW_SIZE), int(pos[1]/self.DRAW_SIZE)]
 
     def __a_star(self, start: Field, target: Field):
         start.set_as_start_field()
