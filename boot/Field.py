@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
 from boot.PathNotFoundException import PathNotFoundException
 from boot.Terrain import Terrain
@@ -8,8 +8,8 @@ class Field:
     neighbours: List['Field']
     terrain: Terrain
     position: List[int]
-    previous: 'Field'
-    cost_from_start: int
+    previous: Union['Field', None]
+    cost_from_start: Union[int, None]
     visited: bool
 
     def __init__(self, terrain: Terrain):
@@ -61,6 +61,12 @@ class Field:
             return False
         else:
             return self.previous.boat_available()
+
+    def reset(self):
+        self.previous = None
+        self.cost_from_start = None
+        self.visited = False
+
 
     def get_position(self) -> Tuple[int, int]:
         return self.position[0], self.position[1]

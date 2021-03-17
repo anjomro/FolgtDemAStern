@@ -3,6 +3,7 @@ import pygame
 from typing import List
 
 from boot.Field import Field
+from boot.PathNotFoundException import PathNotFoundException
 from boot.Terrain import Terrain
 
 
@@ -104,7 +105,10 @@ class Area:
         self.open_list = [current_field]
         self.closed_list = []
         while current_field != target:
-            current_field = self.open_list[0]
+            if len(self.open_list) > 0:
+                current_field = self.open_list[0]
+            else:
+                return
             for field in self.open_list[1:]:
                 if field.get_total_cost(target) < current_field.get_total_cost(target):
                     current_field = field
@@ -118,6 +122,21 @@ class Area:
                 self.open_list.remove(current_field)
             self.closed_list.append(current_field)
 
+    def reset(self):
+        """
+        Resets all fields in Area so that the A*-Algorithmus can be run again
+        """
+        for row in self.fields:
+            for field in row:
+                field.reset()
+
     def get_path(self, start: Field, target: Field) -> List[Field]:
+        self.reset()
         self.__a_star(start, target)
-        return target.recurse_path()
+        path: List[Field] = []
+        try:
+            path = target.recurse_path()
+        except PathNotFoundException:
+            path = [start, target]
+        finally:
+            return path
