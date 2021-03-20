@@ -1,6 +1,6 @@
 import csv
 import pygame
-from typing import List
+from typing import List, Union
 
 from boot.Field import Field
 from boot.PathNotFoundException import PathNotFoundException
@@ -82,6 +82,35 @@ class Area:
             for y, field in enumerate(row):
                 pygame.draw.rect(self.display, self.color_cache[field.terrain.terrain_number],
                                  (x * self.DRAW_SIZE, y * self.DRAW_SIZE, self.DRAW_SIZE, self.DRAW_SIZE))
+    def start_window(self):
+        self.draw_area()
+        pygame.display.update()
+        start: Union[Field, None] = None
+        target: Union[Field, None] = None
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.MOUSEBUTTONUP:
+                    pos = self.convert_mouse_to_field(list(pygame.mouse.get_pos()))
+                    # event.button: 1 is for left mouse click, 2 for middle, 3 for right
+                    if event.button == 3:
+                        start = self.fields[pos[0]][pos[1]]
+                    elif event.button == 1:
+                        if start is None:
+                            start = self.fields[pos[0]][pos[1]]
+                        else:
+                            target = self.fields[pos[0]][pos[1]]
+                    if start is not None:
+                        self.draw_area()
+                        if start is not None and target is not None:
+                            path = self.get_path(start, target)
+                            self.draw_path(path)
+                        else:
+                            self.draw_path([start])
+                    pygame.display.update()
+            pygame.display.update()
 
     def draw_path(self, path: List[Field]):
         if self.display is None:
