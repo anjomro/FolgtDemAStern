@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "61dfc1275b0211f72248b3cb7c7dc3e1b7c97380a1e5ebcc595e0338804d0fc5"
+            "sha256": "d12f06dbed63f89c6db2a0a86d376506a8d4e13ef70eeee0e8932e2e5b52b228"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,13 @@
         ]
     },
     "default": {
+        "appjar": {
+            "hashes": [
+                "sha256:0dbd7ce2cb640392cb33ff94fad7318c7b7f2ba3fe111e2ca35cbf119acbda97"
+            ],
+            "index": "pypi",
+            "version": "==0.94.0"
+        },
         "pygame": {
             "hashes": [
                 "sha256:0571dde0277483f5060c8ee43cbfd8df5776b12505e3948eee241c8ce9b93371",
@@ -72,6 +79,13 @@
             ],
             "version": "==0.17"
         },
+        "pefile": {
+            "hashes": [
+                "sha256:a5d6e8305c6b210849b47a6174ddf9c452b2888340b8177874b862ba6c207645"
+            ],
+            "markers": "sys_platform == 'win32'",
+            "version": "==2019.4.18"
+        },
         "pyinstaller": {
             "hashes": [
                 "sha256:f5c0eeb2aa663cce9a5404292c0195011fa500a6501c873a466b2e8cad3c950c"
@@ -85,6 +99,18 @@
                 "sha256:892310e6363655838485ee748bf1c5e5cade7963686d9af8650ee218a3e0b031"
             ],
             "version": "==2021.1"
+        },
+        "pywin32": {
+            "sys_platform": "== 'win32'",
+            "version": "*"
+        },
+        "pywin32-ctypes": {
+            "hashes": [
+                "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942",
+                "sha256:9dc2d991b3479cc2df15930958b674a48a227d5361d413827a4cfd0b5876fc98"
+            ],
+            "markers": "sys_platform == 'win32'",
+            "version": "==0.2.0"
         }
     }
 }
