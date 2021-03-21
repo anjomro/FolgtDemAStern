@@ -16,7 +16,7 @@ class Terrain:
 
     def __init__(self, terrain_number: int):
         self.terrain_number = terrain_number
-        converter = [1,2,1,3,2]
+        converter = [2,2,1,2,3]
         #Todo: Write interface for entering custom costs
         self.cost = converter[terrain_number]
 
