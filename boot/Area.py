@@ -140,17 +140,22 @@ class Area:
                 current_field = self.open_list[0]
             else:
                 return
-            for field in self.open_list[1:]:
+            # Iterate over open list to find the element with shortest estimated cost to target
+            for field in self.open_list:
                 if field.get_total_cost(target) < current_field.get_total_cost(target):
                     current_field = field
+            # Check every neighbour (set in read_csv function)
             for neighbour in current_field.neighbours:
+                # If the neighbour is in one of the both lists (= visited), check if we found a shorter path
+                if neighbour.visited:
+                    if current_field.get_total_cost(target) < neighbour.get_total_cost(target):
+                        neighbour.previous = current_field
+                        neighbour.cost_from_start = current_field.cost_from_start + current_field.terrain.cost
+                        if neighbour in self.closed_list:
+                            self.closed_list.remove(neighbour)
+                            self.open_list.append(neighbour)
                 if not neighbour.visited and (not neighbour.terrain.is_water() or current_field.boat_available()):
                     self.open_list.append(neighbour)
-                    if Debug.active:
-                        x = neighbour.position[0] * self.DRAW_SIZE + self.INDENT
-                        y = neighbour.position[1] * self.DRAW_SIZE + self.INDENT
-                        pygame.draw.rect(self.display, (255, 255, 255), (x, y, self.INDENT, self.INDENT))
-                        pygame.display.update()
                     neighbour.cost_from_start = current_field.cost_from_start + current_field.terrain.cost
                     neighbour.visited = True
                     neighbour.previous = current_field
@@ -158,11 +163,16 @@ class Area:
                 self.open_list.remove(current_field)
             self.closed_list.append(current_field)
             if Debug.active:
-                x = current_field.position[0] * self.DRAW_SIZE + self.INDENT
-                y = current_field.position[1] * self.DRAW_SIZE + self.INDENT
-                pygame.draw.rect(self.display, (0, 0, 0), (x, y, self.INDENT, self.INDENT))
+                for item in self.open_list:
+                    x = item.position[0] * self.DRAW_SIZE + self.INDENT
+                    y = item.position[1] * self.DRAW_SIZE + self.INDENT
+                    pygame.draw.rect(self.display, (255, 255, 255), (x, y, self.INDENT, self.INDENT))
+                for item in self.closed_list:
+                    x = item.position[0] * self.DRAW_SIZE + self.INDENT
+                    y = item.position[1] * self.DRAW_SIZE + self.INDENT
+                    pygame.draw.rect(self.display, (0, 0, 0), (x, y, self.INDENT, self.INDENT))
                 pygame.display.update()
-                time.sleep(0.05)
+                # time.sleep(0.05)
 
     def reset(self):
         """

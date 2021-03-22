@@ -7,7 +7,7 @@ from boot.Debug import Debug
 
 
 def main():
-    #Debug.set_active()
+    Debug.set_active()
     field_path = input("Select field CSV-File:")
     if field_path == "":
         field_path = "resources/gelaende_001.csv"
