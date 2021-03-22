@@ -9,8 +9,7 @@ Command could be e.g. on Linux: pipenv install --dev && pipenv run python build-
 if sys.platform.startswith('linux') or sys.platform.startswith('freebsd') or sys.platform.startswith('darwin'):
     print("Building for {}".format(sys.platform))
     PyInstaller.__main__.run([
-        '--onefile',
-        '--windowed',
+        '--onefile', #'--windowed',
         '--name=FolgtDemAStern',
         '--add-data=resources/gelaende_001.csv:resources/',
         'main.py'
@@ -18,8 +17,7 @@ if sys.platform.startswith('linux') or sys.platform.startswith('freebsd') or sys
 elif sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
     print("Building for Windows ({})".format(sys.platform))
     PyInstaller.__main__.run([
-        '--onefile',
-        '--windowed',
+        '--onefile', #'--windowed',
         '--name=FolgtDemAStern',
         '--add-data=resources/gelaende_001.csv;resources/',
         'main.py'

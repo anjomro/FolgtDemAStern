@@ -3,6 +3,7 @@ import pygame
 import time
 from typing import List, Union
 
+from boot.Debug import Debug
 from boot.Field import Field
 from boot.PathNotFoundException import PathNotFoundException
 from boot.Terrain import Terrain
@@ -11,7 +12,6 @@ from boot.Terrain import Terrain
 class Area:
     open_list: List[Field]
     closed_list: List[Field]
-    DEBUG = False
 
     width: int
     height: int
@@ -146,7 +146,7 @@ class Area:
             for neighbour in current_field.neighbours:
                 if not neighbour.visited and (not neighbour.terrain.is_water() or current_field.boat_available()):
                     self.open_list.append(neighbour)
-                    if self.DEBUG:
+                    if Debug.active:
                         x = neighbour.position[0] * self.DRAW_SIZE + self.INDENT
                         y = neighbour.position[1] * self.DRAW_SIZE + self.INDENT
                         pygame.draw.rect(self.display, (255, 255, 255), (x, y, self.INDENT, self.INDENT))
@@ -157,7 +157,7 @@ class Area:
             if current_field in self.open_list:
                 self.open_list.remove(current_field)
             self.closed_list.append(current_field)
-            if self.DEBUG:
+            if Debug.active:
                 x = current_field.position[0] * self.DRAW_SIZE + self.INDENT
                 y = current_field.position[1] * self.DRAW_SIZE + self.INDENT
                 pygame.draw.rect(self.display, (0, 0, 0), (x, y, self.INDENT, self.INDENT))
