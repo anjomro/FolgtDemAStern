@@ -5,9 +5,8 @@ import sys
 from boot.Debug import Debug
 
 
-
 def main():
-    Debug.set_active()
+    # Debug.set_active()
     field_path = input("Select field CSV-File:")
     if field_path == "":
         field_path = "resources/gelaende_001.csv"
@@ -20,6 +19,7 @@ def main():
         print("File not found, exiting!")
     except UnicodeDecodeError:
         print(" The file cant be decoded, please ensure its a valid csv-format without any (maybe hidden) special characters")
+
 
 if __name__ == '__main__':
     main()

@@ -42,6 +42,10 @@ class Field:
             return False
 
     def recurse_path(self) -> List['Field']:
+        """
+        Finds path by recursively going through the previous fields. Should be executed on the target field
+        :return: The path from self back to start as list of type Field
+        """
         if self.is_start_field():
             return [self]
         else:
@@ -56,25 +60,50 @@ class Field:
         :return: Boolean is true, if boat is still available
         """
         if self.is_start_field():
-            return True # Recursion End
+            return True  # Recursion End
         elif self.terrain.terrain_number != 0 and self.previous.terrain.terrain_number == 0:
             return False
         else:
             return self.previous.boat_available()
 
     def reset(self):
+        """
+        Reset all field parameters to default. Should be used before new execution of A*
+        """
         self.previous = None
         self.cost_from_start = None
         self.visited = False
 
-
     def get_position(self) -> Tuple[int, int]:
+        """
+        Gets the position of the field and returns it as Tuple
+        :return: Coordinate Tuple (x, y)
+        """
         return self.position[0], self.position[1]
 
     def set_position(self, x: int, y: int):
+        """
+        Stores the given coordinates as the position
+        :param x: x coordinate
+        :param y: y coordinate
+        """
         self.position = [x, y]
 
-    def get_total_cost(self, target: 'Field') -> int:
+    def get_estimated_cost(self, target: 'Field') -> int:
+        """
+        Estimates the minimum cost from the field to the target.
+        :param target: the requested target field
+        :return: Estimated cost as integer value
+        """
         estimated_cost = abs(target.position[0] - self.position[0]) + abs(target.position[1] - self.position[1])
         estimated_cost *= Terrain.get_cheapest_terrain_cost()
+        return estimated_cost
+
+    def get_total_cost(self, target: 'Field') -> int:
+        """
+        Calculates the total cost from the start field to the target
+        :param target: the requested target field
+        :return: Total cost of the path passing through this field as integer value
+        """
+        estimated_cost = self.get_estimated_cost(target)
         return self.cost_from_start + self.terrain.cost + estimated_cost
