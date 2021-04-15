@@ -5,20 +5,42 @@ class Terrain:
     terrain_cache: Dict[int, 'Terrain'] = {}
 
     cost: int
+    terrain_number: int
 
     def __new__(cls, terrain_number: int):
         if terrain_number in cls.terrain_cache.keys():
             return cls.terrain_cache.get(terrain_number)
         else:
-            new_terrain =  object.__new__(cls)
+            new_terrain = object.__new__(cls)
+            new_terrain.init(terrain_number)
             Terrain.terrain_cache[terrain_number] = new_terrain
             return new_terrain
 
-    def __init__(self, terrain_number: int):
+    def init(self, terrain_number: int):
         self.terrain_number = terrain_number
-        converter = [3,3,1,6,4]
-        #Todo: Write interface for entering custom costs
-        self.cost = converter[terrain_number]
+        converter = [3, 3, 1, 6, 4]
+        default_msg = ""
+        if terrain_number < len(converter):
+            default_msg = f"(Default: {converter[terrain_number]})"
+        terrain_cost_str = input(f"Please Enter custom cost for CSV-Index '{terrain_number}' {default_msg}:")
+        terrain_cost = -1
+        if terrain_cost_str == "":
+            if terrain_number < len(converter):
+                print(f"Using Default ({converter[terrain_number]})")
+                terrain_cost = converter[terrain_number]
+            else:
+                print("No default cost given, using Fallback (1)")
+                terrain_cost = 1
+        else:
+            try:
+                terrain_cost = int(terrain_cost_str)
+            except ValueError:
+                print("Entry couldn't be parsed as Integer, Defaulting to '1'")
+                terrain_cost = 1
+        self.cost = terrain_cost
+
+    def __init__(self, terrain_number: int):
+        pass
 
     @staticmethod
     def get_cheapest_terrain_cost() -> int:
