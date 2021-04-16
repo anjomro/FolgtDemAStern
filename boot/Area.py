@@ -1,5 +1,6 @@
 import csv
 import pygame
+import os
 from typing import List, Union
 
 from boot.Debug import Debug
@@ -87,6 +88,10 @@ class Area:
                 pygame.draw.rect(self.display, self.color_cache[field.terrain.terrain_number],
                                  (x * self.DRAW_SIZE, y * self.DRAW_SIZE, self.DRAW_SIZE, self.DRAW_SIZE))
 
+    @staticmethod
+    def cls():
+        os.system('cls' if os.name == 'nt' else 'clear')
+
     def start_window(self):
         """
         Handles the pygame window input including the mouse interaction. Calls the get_path function
@@ -115,6 +120,8 @@ class Area:
                         if target is not None:
                             path = self.get_path(start, target)
                             self.draw_path(path)
+                            self.cls()
+                            print("Total path cost: ", self.get_path_cost(path))
                         else:
                             self.draw_path([start])
                     pygame.display.update()
