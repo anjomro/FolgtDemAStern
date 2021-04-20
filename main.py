@@ -12,6 +12,7 @@ def main():
         if field_path == "":
             field_path = "resources/gelaende_001.csv"
             if getattr(sys, 'frozen', False):
+                #Special path for internal file when distributed as packaged app
                 field_path = os.path.join(sys._MEIPASS, field_path)
             print("Using default file!")
         try:

@@ -2,6 +2,7 @@ import csv
 import pygame
 import os
 from typing import List, Union
+from random import randint
 
 from boot.Debug import Debug
 from boot.Field import Field
@@ -78,18 +79,27 @@ class Area:
         """
         Does the setup for the pygame window and draws the CSV data as a colored field
         """
-        if self.fields.__len__() < 1:
+        if len(self.fields) <= 0: # Exit when field is empty
             return
+        #Initialize pygame with width and size of area for window
         self.display = pygame.display.set_mode([(self.width + 1) * self.DRAW_SIZE, (self.height + 1) * self.DRAW_SIZE])
         row: List[Field]
         for x, row in enumerate(self.fields):
             field: Field
             for y, field in enumerate(row):
+                if field.terrain.terrain_number not in self.color_cache:
+                    #If color is not yet defined generate random color
+                    new_color = [randint(0,255), randint(0,255), randint(0,255)]
+                    self.color_cache[field.terrain.terrain_number] = new_color
+                #Draw rectangale for each field with Terrain-Specific color
                 pygame.draw.rect(self.display, self.color_cache[field.terrain.terrain_number],
                                  (x * self.DRAW_SIZE, y * self.DRAW_SIZE, self.DRAW_SIZE, self.DRAW_SIZE))
 
     @staticmethod
     def cls():
+        """
+        Clears console screen output
+        """
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def start_window(self):
@@ -100,17 +110,21 @@ class Area:
         pygame.display.update()
         start: Union[Field, None] = None
         target: Union[Field, None] = None
+        #Event Loop
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    #Handle window closing
                     pygame.quit()
                     quit()
                 if event.type == pygame.MOUSEBUTTONUP:
                     pos = self.convert_mouse_to_field(list(pygame.mouse.get_pos()))
                     # event.button: 1 is for left mouse click, 2 for middle, 3 for right
                     if event.button == 3:
+                        #Right click sets start position
                         start = self.fields[pos[0]][pos[1]]
                     elif event.button == 1:
+                        #Left click sets target, if no start is set yet it sets the starting point
                         if start is None:
                             start = self.fields[pos[0]][pos[1]]
                         else:
@@ -118,8 +132,10 @@ class Area:
                     if start is not None:
                         self.draw_area()
                         if target is not None:
+                            #If start and target is set calculate path and draw it
                             path = self.get_path(start, target)
                             self.draw_path(path)
+                            #Clear console and print total path cost
                             self.cls()
                             print("Total path cost: ", self.get_path_cost(path))
                         else:
@@ -133,11 +149,13 @@ class Area:
         :param path: Path as a list of objects of the type Field
         """
         if self.display is None:
+            #Exit if no pygame gui has been started
             return
         for field in path:
             color = [255, 0, 0]
             if field.terrain.is_water():
                 color = [255, 255, 0]
+            #Make field-dot yellow if water to achieve contrast, else red
             x = field.position[0] * self.DRAW_SIZE + self.INDENT
             y = field.position[1] * self.DRAW_SIZE + self.INDENT
             pygame.draw.rect(self.display, color, (x, y, self.INDENT, self.INDENT))
@@ -165,6 +183,7 @@ class Area:
         self.open_list = [current_field]
         self.closed_list = []
         while current_field != target:
+            #Iterate till our current_field is the target
             if len(self.open_list) > 0:
                 current_field = self.open_list[0]
             else:
@@ -201,6 +220,7 @@ class Area:
                 self.open_list.remove(current_field)
             self.closed_list.append(current_field)
             if Debug.active:
+                #For debugging visualize open list and closed list
                 for item in self.open_list:
                     x = item.position[0] * self.DRAW_SIZE + self.INDENT
                     y = item.position[1] * self.DRAW_SIZE + self.INDENT
@@ -233,8 +253,10 @@ class Area:
         self.__a_star(start, target)
         path: List[Field] = []
         try:
+            #Retrieve path by recursing from target to start
             path = target.recurse_path()
         except PathNotFoundException:
+            #If path not found run a* backwards to combat possible boot difficulties
             self.reset()
             self.__a_star(start, target, True)
             try:

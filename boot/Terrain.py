@@ -18,14 +18,17 @@ class Terrain:
 
     def init(self, terrain_number: int):
         self.terrain_number = terrain_number
+        #Converter used for determining default cost according to exam
         converter = [3, 3, 1, 6, 4]
         default_msg = ""
         if terrain_number < len(converter):
+            #Display default cost if available
             default_msg = f"(Default: {converter[terrain_number]})"
         terrain_cost_str = input(f"Please Enter custom cost for CSV-Index '{terrain_number}' {default_msg}:")
         terrain_cost = -1
         if terrain_cost_str == "":
             if terrain_number < len(converter):
+                #Use Default
                 print(f"Using Default ({converter[terrain_number]})")
                 terrain_cost = converter[terrain_number]
             else:
