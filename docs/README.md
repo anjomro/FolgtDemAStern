@@ -1,4 +1,4 @@
-# FolgtDemAStern Documentatiion
+# FolgtDemAStern Documentation
 
 Here is a list of the modules of the [FolgtDemAStern](README.md#folgtdemastern-index) project. 
 Each Module has documentation of available methods and classes.
