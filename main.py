@@ -6,6 +6,9 @@ from boot.Debug import Debug
 
 
 def main():
+    """
+    Main entrypoint for method
+    """
     #Debug.set_active()
     try:
         field_path = input("Select field CSV-File (Default: resources/gelaende_001.csv):")
