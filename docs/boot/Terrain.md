@@ -1,8 +1,8 @@
 # Terrain
 
-> Auto-generated documentation for [boot.Terrain](../../boot/Terrain.py) module.
+> Auto-generated documentation for [boot.Terrain](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Terrain.py) module.
 
-- [Folgtdemastern](../README.md#folgtdemastern-index) / [Modules](../MODULES.md#folgtdemastern-modules) / [Boot](index.md#boot) / Terrain
+- [FolgtDemAStern](../README.md#folgtdemastern-index) / [Modules](../README.md#folgtdemastern-modules) / [Boot](index.md#boot) / Terrain
     - [Terrain](#terrain)
         - [Terrain.get_cheapest_terrain_cost](#terrainget_cheapest_terrain_cost)
         - [Terrain.get_max_terrain_cost](#terrainget_max_terrain_cost)
@@ -11,7 +11,7 @@
 
 ## Terrain
 
-[[find in source code]](../../boot/Terrain.py#L4)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Terrain.py#L4)
 
 ```python
 class Terrain():
@@ -20,7 +20,7 @@ class Terrain():
 
 ### Terrain.get_cheapest_terrain_cost
 
-[[find in source code]](../../boot/Terrain.py#L48)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Terrain.py#L48)
 
 ```python
 @staticmethod
@@ -35,7 +35,7 @@ Minimum tarrain cost as integer
 
 ### Terrain.get_max_terrain_cost
 
-[[find in source code]](../../boot/Terrain.py#L61)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Terrain.py#L61)
 
 ```python
 @staticmethod
@@ -50,7 +50,7 @@ Maximum terrain cost as integer
 
 ### Terrain().init
 
-[[find in source code]](../../boot/Terrain.py#L19)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Terrain.py#L19)
 
 ```python
 def init(terrain_number: int):
@@ -58,7 +58,7 @@ def init(terrain_number: int):
 
 ### Terrain().is_water
 
-[[find in source code]](../../boot/Terrain.py#L73)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Terrain.py#L73)
 
 ```python
 def is_water() -> bool:

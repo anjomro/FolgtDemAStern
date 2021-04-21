@@ -1,8 +1,8 @@
 # Field
 
-> Auto-generated documentation for [boot.Field](../../boot/Field.py) module.
+> Auto-generated documentation for [boot.Field](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py) module.
 
-- [Folgtdemastern](../README.md#folgtdemastern-index) / [Modules](../MODULES.md#folgtdemastern-modules) / [Boot](index.md#boot) / Field
+- [FolgtDemAStern](../README.md#folgtdemastern-index) / [Modules](../README.md#folgtdemastern-modules) / [Boot](index.md#boot) / Field
     - [Field](#field)
         - [Field().boat_available](#fieldboat_available)
         - [Field().get_estimated_cost](#fieldget_estimated_cost)
@@ -17,7 +17,7 @@
 
 ## Field
 
-[[find in source code]](../../boot/Field.py#L7)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L7)
 
 ```python
 class Field():
@@ -30,7 +30,7 @@ class Field():
 
 ### Field().boat_available
 
-[[find in source code]](../../boot/Field.py#L57)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L57)
 
 ```python
 def boat_available() -> bool:
@@ -44,7 +44,7 @@ Boolean is true, if boat is still available
 
 ### Field().get_estimated_cost
 
-[[find in source code]](../../boot/Field.py#L92)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L92)
 
 ```python
 def get_estimated_cost(target: 'Field') -> int:
@@ -62,7 +62,7 @@ Estimated cost as integer value
 
 ### Field().get_position
 
-[[find in source code]](../../boot/Field.py#L77)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L77)
 
 ```python
 def get_position() -> Tuple[int, int]:
@@ -76,7 +76,7 @@ Coordinate Tuple (x, y)
 
 ### Field().get_total_cost
 
-[[find in source code]](../../boot/Field.py#L102)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L102)
 
 ```python
 def get_total_cost(target: 'Field') -> int:
@@ -94,7 +94,7 @@ Total cost of the path passing through this field as integer value
 
 ### Field().is_start_field
 
-[[find in source code]](../../boot/Field.py#L35)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L35)
 
 ```python
 def is_start_field() -> bool:
@@ -106,7 +106,7 @@ Returns True when Field is start, False if not
 
 ### Field().recurse_path
 
-[[find in source code]](../../boot/Field.py#L44)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L44)
 
 ```python
 def recurse_path() -> List['Field']:
@@ -120,7 +120,7 @@ The path from self back to start as list of type Field
 
 ### Field().reset
 
-[[find in source code]](../../boot/Field.py#L69)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L69)
 
 ```python
 def reset():
@@ -130,7 +130,7 @@ Reset all field parameters to default. Should be used before new execution of A*
 
 ### Field().set_as_start_field
 
-[[find in source code]](../../boot/Field.py#L29)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L29)
 
 ```python
 def set_as_start_field():
@@ -140,7 +140,7 @@ Sets Field as start field by linking 'previous' attribute to itself
 
 ### Field().set_neighbours
 
-[[find in source code]](../../boot/Field.py#L22)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L22)
 
 ```python
 def set_neighbours(neighbours: List['Field']):
@@ -154,7 +154,7 @@ Sets the list of all fields that are directly reachable
 
 ### Field().set_position
 
-[[find in source code]](../../boot/Field.py#L84)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Field.py#L84)
 
 ```python
 def set_position(x: int, y: int):

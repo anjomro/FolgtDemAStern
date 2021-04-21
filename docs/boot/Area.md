@@ -1,8 +1,8 @@
 # Area
 
-> Auto-generated documentation for [boot.Area](../../boot/Area.py) module.
+> Auto-generated documentation for [boot.Area](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py) module.
 
-- [Folgtdemastern](../README.md#folgtdemastern-index) / [Modules](../MODULES.md#folgtdemastern-modules) / [Boot](index.md#boot) / Area
+- [FolgtDemAStern](../README.md#folgtdemastern-index) / [Modules](../README.md#folgtdemastern-modules) / [Boot](index.md#boot) / Area
     - [Area](#area)
         - [Area().__a_star](#area__a_star)
         - [Area.cls](#areacls)
@@ -17,7 +17,7 @@
 
 ## Area
 
-[[find in source code]](../../boot/Area.py#L13)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L13)
 
 ```python
 class Area():
@@ -26,7 +26,7 @@ class Area():
 
 ### Area().__a_star
 
-[[find in source code]](../../boot/Area.py#L171)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L171)
 
 ```python
 def __a_star(start: Field, target: Field, force_land: bool = False):
@@ -47,7 +47,7 @@ Implementation of the A* algorithm for pathfinding with implementation of a one-
 
 ### Area.cls
 
-[[find in source code]](../../boot/Area.py#L98)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L98)
 
 ```python
 @staticmethod
@@ -58,7 +58,7 @@ Clears console screen output
 
 ### Area().convert_mouse_to_field
 
-[[find in source code]](../../boot/Area.py#L163)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L163)
 
 ```python
 def convert_mouse_to_field(pos: List[int]) -> List[int]:
@@ -76,7 +76,7 @@ Coordinates of the clicked field
 
 ### Area().draw_area
 
-[[find in source code]](../../boot/Area.py#L78)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L78)
 
 ```python
 def draw_area():
@@ -86,7 +86,7 @@ Does the setup for the pygame window and draws the CSV data as a colored field
 
 ### Area().draw_path
 
-[[find in source code]](../../boot/Area.py#L146)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L146)
 
 ```python
 def draw_path(path: List[Field]):
@@ -100,7 +100,7 @@ Draws the given list of Fields as a path with red dots on land and yellow dots o
 
 ### Area().get_path
 
-[[find in source code]](../../boot/Area.py#L243)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L243)
 
 ```python
 def get_path(start: Field, target: Field) -> List[Field]:
@@ -125,7 +125,7 @@ Found path as a list of type Field including start and target. List is empty if 
 
 ### Area.get_path_cost
 
-[[find in source code]](../../boot/Area.py#L269)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L269)
 
 ```python
 @staticmethod
@@ -144,7 +144,7 @@ Path cost as integer value
 
 ### Area().read_csv
 
-[[find in source code]](../../boot/Area.py#L42)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L42)
 
 ```python
 def read_csv(filename: str, delimiter: str = ';'):
@@ -160,7 +160,7 @@ Each row presents one row of the are, fields are separated using the given delim
 
 ### Area().reset
 
-[[find in source code]](../../boot/Area.py#L234)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L234)
 
 ```python
 def reset():
@@ -170,7 +170,7 @@ Resets all fields in Area so that the A*-Algorithmus can be run again
 
 ### Area().start_window
 
-[[find in source code]](../../boot/Area.py#L105)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Area.py#L105)
 
 ```python
 def start_window():

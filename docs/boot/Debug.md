@@ -1,15 +1,15 @@
 # Debug
 
-> Auto-generated documentation for [boot.Debug](../../boot/Debug.py) module.
+> Auto-generated documentation for [boot.Debug](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Debug.py) module.
 
-- [Folgtdemastern](../README.md#folgtdemastern-index) / [Modules](../MODULES.md#folgtdemastern-modules) / [Boot](index.md#boot) / Debug
+- [FolgtDemAStern](../README.md#folgtdemastern-index) / [Modules](../README.md#folgtdemastern-modules) / [Boot](index.md#boot) / Debug
     - [Debug](#debug)
         - [Debug.print](#debugprint)
         - [Debug.set_active](#debugset_active)
 
 ## Debug
 
-[[find in source code]](../../boot/Debug.py#L2)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Debug.py#L2)
 
 ```python
 class Debug():
@@ -19,7 +19,7 @@ Class contains debug functionalities
 
 ### Debug.print
 
-[[find in source code]](../../boot/Debug.py#L8)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Debug.py#L8)
 
 ```python
 @staticmethod
@@ -34,7 +34,7 @@ Simple debug print. Only prints if debug option is active
 
 ### Debug.set_active
 
-[[find in source code]](../../boot/Debug.py#L17)
+[[find in source code]](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/Debug.py#L17)
 
 ```python
 @staticmethod

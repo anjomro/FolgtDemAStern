@@ -1,8 +1,12 @@
-# Folgtdemastern Index
+# FolgtDemAStern Documentatiion
 
-> Auto-generated documentation index.
+Here is a list of the modules of the [FolgtDemAStern](README.md#folgtdemastern-index) project. 
+Each Module has documentation of available methods and classes.
 
-Full Folgtdemastern project documentation can be found in [Modules](MODULES.md#folgtdemastern-modules)
-
-- [Folgtdemastern Index](#folgtdemastern-index)
-  - [Folgtdemastern Modules](MODULES.md#folgtdemastern-modules)
+- [FolgtDemAStern Index](README.md#folgtdemastern-index)
+    - [Area](boot/Area.md#area)
+    - [Debug](boot/Debug.md#debug)
+    - [Field](boot/Field.md#field)
+    - [PathNotFoundException](boot/PathNotFoundException.md#pathnotfoundexception)
+    - [Terrain](boot/Terrain.md#terrain)
+- [Boot](boot/index.md#boot)

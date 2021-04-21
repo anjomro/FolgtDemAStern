@@ -1,8 +1,8 @@
 # Boot
 
-> Auto-generated documentation for [boot](../../boot/__init__.py) module.
+> Auto-generated documentation for [boot](https://github.com/anjomro/FolgtDemAStern/blob/master/boot/__init__.py) module.
 
-- [Folgtdemastern](../README.md#folgtdemastern-index) / [Modules](../MODULES.md#folgtdemastern-modules) / Boot
+- [FolgtDemAStern](../README.md#folgtdemastern-index) / [Modules](../README.md#folgtdemastern-modules) / Boot
     - Modules
         - [Area](Area.md#area)
         - [Debug](Debug.md#debug)
